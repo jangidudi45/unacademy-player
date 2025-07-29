@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lecture Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fefefe;
+      color: #222;
+      padding: 20px;
+      text-align: center;
+    }
+    video {
+      width: 90%;
+      max-width: 720px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .buttons a {
+      padding: 10px 20px;
+      text-decoration: none;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .buttons a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="title">📌 Lecture Title</h2>
+  <video id="videoPlayer" controls poster="">
+    <source id="videoSource" src="" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="buttons">
+    <a id="videoDownload" href="#" target="_blank">Download Video</a>
+    <a id="pdfDownload" href="#" target="_blank">Download Notes</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoUrl = urlParams.get("video");
+    const pdfUrl = urlParams.get("pdf");
+    const title = urlParams.get("title") || "Lecture Player";
+
+    if (videoUrl) {
+      document.getElementById("videoSource").src = videoUrl;
+      document.getElementById("videoPlayer").load();
+      document.getElementById("videoDownload").href = videoUrl;
+    }
+
+    if (pdfUrl) {
+      document.getElementById("pdfDownload").href = pdfUrl;
+    }
+
+    document.getElementById("title").textContent = `📌 ${title}`;
+  </script>
+</body>
+</html>
